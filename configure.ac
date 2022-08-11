@@ -18,7 +18,7 @@ AC_INIT(MiniDLNA,1.3.0.2,,minidlna)
 #LT_INIT
 
 AC_CANONICAL_TARGET
-AM_INIT_AUTOMAKE([subdir-objects])
+AM_INIT_AUTOMAKE([subdir-objects tar-ustar foreign])
 AC_CONFIG_HEADERS([config.h])
 AM_SILENT_RULES([yes])
 
