@@ -435,13 +435,18 @@ for dir in "" /usr/local $SEARCH_DIR; do
     if test -n "$dir"; then
         LDFLAGS="$LDFLAGS -L$dir/lib"
     fi
-    AC_CHECK_LIB([avformat -lavcodec -lavutil -lz], [avformat_open_input], [LIBAVFORMAT_LIBS="-lavformat -lavcodec -lavutil -lz"],
+    AC_CHECK_LIB([avformat -lavcodec -lavutil -lz -lswresample], [avformat_open_input], [LIBAVFORMAT_LIBS="-lavformat -lavcodec -lavutil -lz -lswresample"],
+        [AC_CHECK_LIB([avformat -lavcodec -lavutil -lz], [avformat_open_input], [LIBAVFORMAT_LIBS="-lavformat -lavcodec -lavutil -lz"],
 		 [AC_CHECK_LIB([avformat -lavcodec -lavutil -lz], [av_open_input_file], [LIBAVFORMAT_LIBS="-lavformat -lavcodec -lavutil -lz"],
-		  [unset ac_cv_lib_avformat__lavcodec__lavutil__lz___av_open_input_file; unset ac_cv_lib_avformat__lavcodec__lavutil__lz___avformat_open_input; LDFLAGS="$LDFLAGS_SAVE"; continue])])
+		  [unset ac_cv_lib_avformat__lavcodec__lavutil__lz__lswresample___avformat_open_input;
+		   unset ac_cv_lib_avformat__lavcodec__lavutil__lz___avformat_open_input;
+		   unset ac_cv_lib_avformat__lavcodec__lavutil__lz___av_open_input_file;
+		   LDFLAGS="$LDFLAGS_SAVE"; continue])])])
     break
 done
-if test x"$ac_cv_lib_avformat__lavcodec__lavutil__lz___av_open_input_file" != x"yes" &&
-   test x"$ac_cv_lib_avformat__lavcodec__lavutil__lz___avformat_open_input" != x"yes"; then
+if test x"$ac_cv_lib_avformat__lavcodec__lavutil__lz__lswresample___avformat_open_input" != x"yes" &&
+   test x"$ac_cv_lib_avformat__lavcodec__lavutil__lz___avformat_open_input" != x"yes" &&
+   test x"$ac_cv_lib_avformat__lavcodec__lavutil__lz___av_open_input_file" != x"yes"; then
    AC_MSG_ERROR([Could not find libavformat - part of ffmpeg])
 fi
 AC_SUBST(LIBAVFORMAT_LIBS)
