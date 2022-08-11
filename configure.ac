@@ -437,7 +437,7 @@ for dir in "" /usr/local $SEARCH_DIR; do
     fi
     AC_CHECK_LIB([avformat -lavcodec -lavutil -lz], [avformat_open_input], [LIBAVFORMAT_LIBS="-lavformat -lavcodec -lavutil -lz"],
 		 [AC_CHECK_LIB([avformat -lavcodec -lavutil -lz], [av_open_input_file], [LIBAVFORMAT_LIBS="-lavformat -lavcodec -lavutil -lz"],
-		  [unset ac_cv_lib_avformat_av_open_input_file; unset ac_cv_lib_avformat_avformat_open_input; LDFLAGS="$LDFLAGS_SAVE"; continue])])
+		  [unset ac_cv_lib_avformat__lavcodec__lavutil__lz___av_open_input_file; unset ac_cv_lib_avformat__lavcodec__lavutil__lz___avformat_open_input; LDFLAGS="$LDFLAGS_SAVE"; continue])])
     break
 done
 if test x"$ac_cv_lib_avformat__lavcodec__lavutil__lz___av_open_input_file" != x"yes" &&
